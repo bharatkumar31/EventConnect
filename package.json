@@ -1,0 +1,48 @@
+{
+  "name": "popin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhaveshchhimwal/PopIn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/bhaveshchhimwal/PopIn/issues"
+  },
+  "homepage": "https://github.com/bhaveshchhimwal/PopIn#readme",
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^7.2.0",
+    "@sendgrid/mail": "^8.1.6",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "firebase": "^12.4.0",
+    "firebase-admin": "^13.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.2",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.12",
+    "pg": "^8.16.3",
+    "prisma": "^7.2.0",
+    "qrcode": "^1.5.4",
+    "streamifier": "^0.1.1",
+    "stripe": "^19.3.1"
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.8.29",
+    "nodemon": "^3.1.10"
+  }
+}
