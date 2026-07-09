@@ -1,6 +1,8 @@
 import Stripe from "stripe";
 import dotenv from "dotenv";
 import prisma from "../prismaClient.js";
+import { generateTicketNumber } from "../utils/generateTicketNumber.js";
+import { sendTicketEmail } from "../utils/emailService.js";
 
 dotenv.config();
 
@@ -35,10 +37,12 @@ export const createCheckoutSession = async (req, res) => {
 
     const unitAmount = Math.round(Number(event.price) * 100);
 
+    const clientUrl = req.headers.origin || process.env.CLIENT_URL;
+
     const successUrl =
-      `${process.env.CLIENT_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}&payment_session=true`;
+      `${clientUrl}/payment/success?session_id={CHECKOUT_SESSION_ID}&payment_session=true`;
     const cancelUrl =
-      `${process.env.CLIENT_URL}/payment/failed?payment_session=true`;
+      `${clientUrl}/payment/failed?payment_session=true`;
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -76,16 +80,101 @@ export const verifyCheckoutSession = async (req, res) => {
     return res.status(400).json({ success: false });
   }
 
-  const ticket = await prisma.ticket.findFirst({
-    where: { stripeSessionId: sessionId },
-  });
+  try {
+    // 1. Check if we already fulfilled this session (e.g. webhook beat us to it)
+    const existingTicket = await prisma.ticket.findFirst({
+      where: { stripeSessionId: sessionId },
+    });
 
-  if (!ticket) {
+    if (existingTicket) {
+      return res.json({ success: true });
+    }
+
+    // 2. Fetch the session directly from Stripe
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    if (session.payment_status === "paid") {
+      const { eventId, userId, quantity } = session.metadata;
+      const qty = parseInt(quantity, 10);
+
+      // 3. Fulfill tickets in a transaction
+      const createdTickets = await prisma.$transaction(async (tx) => {
+        // Double check existence inside transaction to avoid race conditions
+        const txExisting = await tx.ticket.findFirst({
+          where: { stripeSessionId: session.id },
+        });
+        if (txExisting) return null;
+
+        const updated = await tx.event.updateMany({
+          where: {
+            id: eventId,
+            capacity: { gte: qty },
+          },
+          data: {
+            capacity: { decrement: qty },
+            ticketsSold: { increment: qty },
+          },
+        });
+        
+        if (updated.count === 0) {
+          throw new Error("NOT_ENOUGH_TICKETS");
+        }
+
+        const ev = await tx.event.findUnique({ where: { id: eventId } });
+        const ticketPromises = [];
+        for (let i = 0; i < qty; i++) {
+          ticketPromises.push(
+            tx.ticket.create({
+              data: {
+                userId,
+                eventId,
+                eventName: ev.title,
+                eventDate: ev.date,
+                unitPrice: ev.price,
+                quantity: 1,
+                totalPrice: ev.price,
+                stripeSessionId: session.id,
+                ticketNumber: generateTicketNumber(),
+                status: "CONFIRMED",
+                purchaseDate: new Date(),
+              },
+            })
+          );
+        }
+        const tickets = await Promise.all(ticketPromises);
+        return { tickets, event: ev };
+      });
+
+      if (createdTickets) {
+        // Send email
+        const user = await prisma.user.findUnique({
+          where: { id: userId },
+          select: { email: true, name: true },
+        });
+        if (user && user.email) {
+          await sendTicketEmail(
+            user.email,
+            user.name,
+            createdTickets.tickets,
+            createdTickets.event
+          );
+        }
+      }
+
+      return res.json({ success: true });
+    }
+
+    // If not paid
     return res.json({
       success: false,
-      reason: "NO_TICKETS_AVAILABLE",
+      reason: "PAYMENT_NOT_COMPLETED",
+    });
+
+  } catch (error) {
+    console.error("verifyCheckoutSession error:", error);
+    return res.json({
+      success: false,
+      reason: "VERIFICATION_ERROR",
     });
   }
-
-  return res.json({ success: true });
 };
