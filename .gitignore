@@ -8,6 +8,7 @@ build/
 
 
 server/.env
+.env
 server/.DS_Store
 server/utils/serviceAccountKey.json
 .DS_Store
