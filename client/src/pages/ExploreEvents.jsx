@@ -82,7 +82,7 @@ export default function ExploreEvents() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-slate-50">
       <Navbar />
       <main className="flex-grow">
         <HeroSearch
@@ -118,8 +118,8 @@ export default function ExploreEvents() {
         )}
       </main>
 
-      <footer className="text-center py-3 text-gray-600 text-sm bg-white">
-        © {new Date().getFullYear()} EventConnect. All rights reserved.
+      <footer className="bg-white border-t border-slate-100 py-5 text-center text-slate-400 text-xs sm:text-sm">
+        © {new Date().getFullYear()} <span className="font-semibold text-slate-600">EventConnect</span>. All rights reserved.
       </footer>
     </div>
   );
