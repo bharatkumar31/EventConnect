@@ -41,7 +41,7 @@ const LandingPage = () => {
             Your Event, Your Audience
           </h2>
           <p className="text-base sm:text-lg text-gray-200 mb-8">
-            PopIn makes it simple to buy tickets or host your own events.
+            EventConnect makes it simple to buy tickets or host your own events.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center">
@@ -53,7 +53,7 @@ const LandingPage = () => {
             </a>
             <a
               href="/seller/login"
-              className="px-5 py-2.5 sm:px-6 sm:py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow-md inline-flex items-center justify-center transition text-sm sm:text-base"
+              className="px-5 py-2.5 sm:px-6 sm:py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow-md inline-flex items-center justify-center transition text-sm sm:text-base"
             >
               <CalendarPlus className="w-5 h-5 mr-2" /> Add Event
             </a>
@@ -76,7 +76,7 @@ const LandingPage = () => {
           </div>
 
           <div className="p-6 shadow rounded-lg bg-white hover:shadow-md transition">
-            <User className="w-10 h-10 mx-auto text-green-600 mb-4" />
+            <User className="w-10 h-10 mx-auto text-indigo-600 mb-4" />
             <h3 className="font-bold text-lg">For Sellers</h3>
             <p className="text-gray-600 text-sm sm:text-base">
               Create and manage events, and track ticket sales all in one place.
@@ -95,7 +95,7 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className="text-center py-3 bg-gray-100 text-gray-600 text-xs sm:text-sm">
-        © {new Date().getFullYear()} PopIn. All rights reserved.
+        © {new Date().getFullYear()} EventConnect. All rights reserved.
       </footer>
     </div>
   );

@@ -43,7 +43,7 @@ export default function EventCard({ event }) {
               e.stopPropagation();
               navigate(`/events/${id}`);
             }}
-            className="ml-4 bg-green-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-600"
+            className="ml-4 bg-indigo-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-indigo-700"
           >
             Book Ticket
           </button>

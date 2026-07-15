@@ -179,7 +179,7 @@ export default function EventDetailPage() {
                     handleBook();
                   }}
                   disabled={booking}
-                  className="w-full sm:w-auto bg-green-600 text-white px-4 py-2 rounded disabled:opacity-60"
+                  className="w-full sm:w-auto bg-indigo-600 text-white px-4 py-2 rounded disabled:opacity-60"
                 >
                   {booking ? "Booking..." : "Book Tickets"}
                 </button>

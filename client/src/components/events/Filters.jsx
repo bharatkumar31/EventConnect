@@ -20,8 +20,8 @@ export default function Filters({ category = "All", onChange }) {
             key={cat}
             onClick={() => onChange && onChange(cat)}
             className={
-              "flex-shrink-0 px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-green-100 hover:border-green-400 font-medium transition text-sm sm:text-base " +
-              (category === cat ? "bg-green-500 text-white border-green-500" : "")
+              "flex-shrink-0 px-4 py-2 rounded-full border border-gray-300 text-gray-700 hover:bg-indigo-100 hover:border-indigo-400 font-medium transition text-sm sm:text-base " +
+              (category === cat ? "bg-indigo-600 text-white border-indigo-600" : "")
             }
           >
             {cat}

@@ -57,7 +57,7 @@ export default function Navbar() {
 
             <button
               onClick={() => navigate("/events/create")}
-              className="flex items-center gap-1 text-green-600 hover:text-green-700 font-semibold transition"
+              className="flex items-center gap-1 text-indigo-600 hover:text-indigo-700 font-semibold transition"
             >
               <PlusCircle size={15} />
               Create Event
@@ -120,7 +120,7 @@ export default function Navbar() {
                 navigate("/events/create");
                 setMenuOpen(false);
               }}
-              className="flex items-center gap-2 text-green-600 hover:text-green-700 font-semibold transition"
+              className="flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-semibold transition"
             >
               <PlusCircle size={16} />
               Create Event

@@ -36,7 +36,7 @@ export default function HeroSearch({ value = "", onChange, onSearch }) {
 
           <button
             onClick={() => onSearch && onSearch()}
-            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 sm:py-2.5 px-5 rounded-md text-sm sm:text-base transition"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 sm:py-2.5 px-5 rounded-md text-sm sm:text-base transition"
           >
             Find Events
           </button>

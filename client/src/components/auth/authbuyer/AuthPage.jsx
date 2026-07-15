@@ -141,7 +141,7 @@ export default function AuthLayout({ defaultMode = "login" }) {
       </main>
 
       <footer className="text-center py-3 text-gray-600 text-sm bg-white">
-        © {new Date().getFullYear()} PopIn. All rights reserved.
+        © {new Date().getFullYear()} EventConnect. All rights reserved.
       </footer>
     </div>
   );
