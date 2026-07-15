@@ -6,7 +6,7 @@ const isLocalhost = window.location.hostname === 'localhost' ||
 const axiosInstance = axios.create({
   baseURL: isLocalhost 
     ? 'http://localhost:8080/api' 
-    : 'https://popin-evz9.onrender.com/api',
+    : 'https://eventconnect-8kzc.onrender.com/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
