@@ -48,7 +48,7 @@ export const createEvent = [
 
       if (req.file?.buffer) {
         const result = await uploadBufferToCloudinary(req.file.buffer, {
-          folder: "popin/events",
+          folder: "eventconnect/events",
           resource_type: "image",
           transformation: [{ width: 1200, crop: "limit" }],
         });
@@ -187,7 +187,7 @@ export const updateEvent = [
 
       if (req.file?.buffer) {
         const result = await uploadBufferToCloudinary(req.file.buffer, {
-          folder: "popin/events",
+          folder: "eventconnect/events",
           resource_type: "image",
         });
 
