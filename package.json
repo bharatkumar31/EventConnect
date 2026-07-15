@@ -1,7 +1,7 @@
 {
-  "name": "popin",
+  "name": "eventconnect",
   "version": "1.0.0",
-  "description": "",
+  "description": "Event booking platform",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bhaveshchhimwal/PopIn.git"
+    "url": "git+https://github.com/bharatkumar31/EventConnect.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bharat Kumar",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/bhaveshchhimwal/PopIn/issues"
+    "url": "https://github.com/bharatkumar31/EventConnect/issues"
   },
-  "homepage": "https://github.com/bhaveshchhimwal/PopIn#readme",
+  "homepage": "https://github.com/bharatkumar31/EventConnect#readme",
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
